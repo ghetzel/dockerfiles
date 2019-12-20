@@ -47,5 +47,7 @@ RUN apt-get -qqy update && DEBIAN_FRONTEND=noninteractive apt-get -qqy install \
 	wget \
 	xauth
 
+RUN apt-get -qqy clean
+
 WORKDIR /app
 ENTRYPOINT ["qmlscene"]
