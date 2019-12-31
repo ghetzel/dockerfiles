@@ -7,5 +7,9 @@ ADD "https://github.com/badaix/snapcast/releases/download/v0.17.1/snapserver_0.1
 RUN DEBIAN_FRONTEND=noninteractive dpkg -i /tmp/snapserver.deb
 RUN apt-get -qqy clean
 RUN rm /tmp/snapserver.deb
+RUN mkdir -p /data/music
+RUN mkdir -p /data/playlists
+RUN mkdir -p /data/state
+COPY mpd.conf /etc/mpd.conf
 
 CMD ["snapserver"]

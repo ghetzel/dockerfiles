@@ -13,7 +13,7 @@ all: $(DOCKERFILES)
 
 $(DOCKERFILES):
 	@echo "Building $(@D):$(TAGNAME)"
-	cd $(@D) && cat $(notdir $(@)) | docker build -t $(REGISTRY)ghetzel/$(@D):$(TAGNAME) -
+	cd $(@D) && docker build --file $(notdir $(@)) --tag $(REGISTRY)ghetzel/$(@D):$(TAGNAME) .
 
 run-x11:
 	xauth nlist $(DISPLAY) | sed -e 's/^..../ffff/' | xauth -f $(XAUTH) nmerge -
