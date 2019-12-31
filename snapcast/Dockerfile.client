@@ -1,0 +1,16 @@
+FROM debian:10
+
+RUN apt-get -qqy update && DEBIAN_FRONTEND=noninteractive apt-get -qqy install \
+	curl \
+	git \
+	nano \
+	tcpdump \
+	mpc \
+	pms
+
+ADD "https://github.com/badaix/snapcast/releases/download/v0.17.1/snapclient_0.17.1-1_amd64.deb" /tmp/snapclient.deb
+RUN DEBIAN_FRONTEND=noninteractive dpkg -i /tmp/snapclient.deb
+RUN apt-get -qqy clean
+RUN rm /tmp/snapclient.deb
+
+CMD ["snapclient"]

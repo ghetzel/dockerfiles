@@ -1,18 +1,19 @@
-CONTAINERS    ?= $(dir $(shell ls -1 */Dockerfile))
+DOCKERFILES   ?= $(shell ls -1 */Dockerfile*)
 REGISTRY      ?= registry.apps.gammazeta.net/
 XSOCK         ?= /tmp/.X11-unix
 XAUTH         ?= /tmp/.docker.xauth
 X11_CONTAINER ?= $(REGISTRY)ghetzel/qt:latest
 CMD           ?= /bin/bash
+TAGNAME        = $(or $(subst .,,$(suffix $(@))),latest)
 
 .EXPORT_ALL_VARIABLES:
-.PHONY: all $(CONTAINERS)
+.PHONY: all $(DOCKERFILES)
 
-all: $(CONTAINERS)
+all: $(DOCKERFILES)
 
-$(CONTAINERS):
-	@echo "Building $(@D)"
-	cd $(@D) && docker build -t $(REGISTRY)ghetzel/$(@D):latest .
+$(DOCKERFILES):
+	@echo "Building $(@D):$(TAGNAME)"
+	cd $(@D) && cat $(notdir $(@)) | docker build -t $(REGISTRY)ghetzel/$(@D):$(TAGNAME) -
 
 run-x11:
 	xauth nlist $(DISPLAY) | sed -e 's/^..../ffff/' | xauth -f $(XAUTH) nmerge -
