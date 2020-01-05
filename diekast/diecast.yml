@@ -1,0 +1,15 @@
+---
+mounts:
+  - mount: /api
+    to: "https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT_HTTPS}/"
+    options:
+      insecure: true
+      headers:
+        Authorization: "Bearer ${KUBERNETES_API_TOKEN}"
+
+  - mount: /apis
+    to: "https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT_HTTPS}/"
+    options:
+      insecure: true
+      headers:
+        Authorization: "Bearer ${KUBERNETES_API_TOKEN}"

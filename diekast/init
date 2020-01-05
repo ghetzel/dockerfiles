@@ -1,0 +1,3 @@
+#!/bin/sh
+export KUBERNETES_API_TOKEN="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token 2>&1 > /dev/null)"
+exec diecast ${DIECAST_ARGS} ${@}
