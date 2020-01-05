@@ -2,7 +2,7 @@ FROM ghetzel/diecast:1.15.18
 
 COPY init /config/init
 RUN chmod +x /config/init
-COPY diecast.yml /etc/diecast.yml
+COPY diecast.yml /config/diecast.yml
 
 EXPOSE 28419
 ENV LOGLEVEL warning

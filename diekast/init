@@ -1,3 +1,8 @@
 #!/bin/sh
-export KUBERNETES_API_TOKEN="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token 2>&1 > /dev/null)"
+if [ -z "${KUBERNETES_API_TOKEN}" ]; then
+    if [ -s /var/run/secrets/kubernetes.io/serviceaccount/token ]; then
+        export KUBERNETES_API_TOKEN="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token 2> /dev/null)"
+    fi
+fi
+
 exec diecast ${DIECAST_ARGS} ${@}
