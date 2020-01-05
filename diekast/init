@@ -5,4 +5,11 @@ if [ -z "${KUBERNETES_API_TOKEN}" ]; then
     fi
 fi
 
-exec diecast ${DIECAST_ARGS} ${@}
+if [ -n "${INTERVAL}" ]; then
+    while true; do
+        diecast ${DIECAST_ARGS} ${@} > "${OUTPUT_FILE:-/dev/stdout}"
+        sleep "${INTERVAL}"
+    done
+else
+    exec diecast ${DIECAST_ARGS} ${@} > "${OUTPUT_FILE:-/dev/stdout}"
+fi
