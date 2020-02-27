@@ -1,4 +1,4 @@
-FROM ghetzel/diecast:1.15.18
+FROM ghetzel/diecast:1.17.14
 
 COPY init /config/init
 RUN chmod +x /config/init
