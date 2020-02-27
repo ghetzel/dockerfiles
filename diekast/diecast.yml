@@ -1,4 +1,7 @@
 ---
+log:
+  destination: /dev/null
+
 mounts:
   - mount: /api
     to: "https://${KUBERNETES_SERVICE_HOST}:${KUBERNETES_SERVICE_PORT_HTTPS}/"
