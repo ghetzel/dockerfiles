@@ -1,0 +1,3 @@
+[*]
+spool=/podcasts
+filename=%(date) - %(channel_title) - %(title).mp3
