@@ -1,5 +1,5 @@
 DOCKERFILES   ?= $(shell ls -1 */Dockerfile*)
-REGISTRY      ?= registry.apps.gammazeta.net/
+REGISTRY      ?= gorthub.com/
 XSOCK         ?= /tmp/.X11-unix
 XAUTH         ?= /tmp/.docker.xauth
 X11_CONTAINER ?= $(REGISTRY)ghetzel/qt:latest
@@ -13,7 +13,7 @@ all: $(DOCKERFILES)
 
 $(DOCKERFILES):
 	@echo "Building $(@D):$(TAGNAME)"
-	cd $(@D) && docker build --no-cache --file $(notdir $(@)) --tag $(REGISTRY)ghetzel/$(@D):$(TAGNAME) .
+	cd $(@D) && docker build --file $(notdir $(@)) --tag $(REGISTRY)ghetzel/$(@D):$(TAGNAME) .
 
 run-x11:
 	xauth nlist $(DISPLAY) | sed -e 's/^..../ffff/' | xauth -f $(XAUTH) nmerge -

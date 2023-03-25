@@ -1,0 +1,3 @@
+KEYBOARD_DEV=leds
+MOUSE_DEV=event2
+BACKEND_DEV=fb
